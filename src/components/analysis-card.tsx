@@ -4,8 +4,7 @@ import Image from 'next/image'
 import { Button } from './ui/button'
 import Link from 'next/link'
 
-export default function AnalysisCard() {
-  const img = 'https://www.tradingview.com/x/8GbwaRJX'
+export default function AnalysisCard({ img }: { img: string }) {
   return (
     <Card className='md:w-[330px]'>
       <CardHeader>
@@ -20,7 +19,7 @@ export default function AnalysisCard() {
       <CardFooter className="flex justify-between items-center gap-2">
         <Link className='w-full' target='_blink' href={img}>
           <Button className='w-full' variant="outline">View Charts</Button>
-          </Link>
+        </Link>
         <Button>See Deatils</Button>
       </CardFooter>
 
