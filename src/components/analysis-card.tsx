@@ -6,14 +6,14 @@ import { Button } from './ui/button'
 export default function AnalysisCard() {
   const img = 'https://www.tradingview.com/x/8GbwaRJX'
   return (
-    <Card className='md:w-1/4'>
+    <Card className='md:w-[330px]'>
       <CardHeader>
         <CardTitle>Analysis of XECUSDT</CardTitle>
       </CardHeader>
       <CardContent>
 
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={'https://www.tradingview.com/x/8GbwaRJX'} alt="fsa" className='w-[300px] h-[200px]' />
+        <img src={'https://www.tradingview.com/x/8GbwaRJX'} alt="fsa" />
         <CardDescription>This is the description of this analysis!</CardDescription>
       </CardContent>
       <CardFooter className="flex justify-between">
