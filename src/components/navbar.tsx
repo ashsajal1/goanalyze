@@ -9,7 +9,7 @@ import Image from 'next/image'
 
 export default async function Navbar() {
   const user = await currentUser()
-  console.log(user)
+  // console.log(user)
 
   return (
     <nav className='flex items-center justify-between bg-primary h-[60px] p-2'>
