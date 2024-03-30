@@ -2,10 +2,15 @@ import Link from 'next/link'
 import React from 'react'
 import { ModeToggle } from './mode-toggle'
 import { Button } from './ui/button'
-import { RocketIcon } from '@radix-ui/react-icons'
+import { EnterIcon, RocketIcon } from '@radix-ui/react-icons'
 import { Badge } from './ui/badge'
+import { auth, currentUser } from "@clerk/nextjs";
+import Image from 'next/image'
 
-export default function Navbar() {
+export default async function Navbar() {
+  const user = await currentUser()
+  console.log(user)
+
   return (
     <nav className='flex items-center justify-between bg-primary h-[60px] p-2'>
       <Link className='text-xl font-bold' href={'/'}>GoAnalyze</Link>
@@ -18,6 +23,9 @@ export default function Navbar() {
           </Button>
         </Link>
         <ModeToggle />
+
+        {(user && user.hasImage) ? <Button className='relative'><Image alt='Profile image' src={user.imageUrl} layout="fill" /></Button> : <Link href='/sign-in'><Button variant="outline" size="icon"><EnterIcon /></Button></Link>}
+
       </div>
     </nav>
   )
