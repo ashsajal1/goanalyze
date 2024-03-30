@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
+import prisma from "../../prisma/client"
 
 const formSchema = z.object({
     imageurl: z.string().min(6, {
@@ -42,9 +43,29 @@ export function AddSignalForm() {
 
     // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
+        // try {
+        //     // Create the analysis using the form values
+        //     const createdAnalysis = await prisma.analysis.create({
+        //         data: {
+        //             imageUrl: values.imageurl,
+        //             description: values.description,
+        //             pair: values.pair,
+        //         }
+        //     });
+        //     console.log('Analysis created:', createdAnalysis);
+        // } catch (error) {
+        //     console.error('Error creating analysis:', error);
+        // }
+        const response = await fetch('/api/analysis', {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(values)
+          });
+        //   return await response.json(); 
+        const data = await response.json();
+        console.log(data);
     }
 
     return (
