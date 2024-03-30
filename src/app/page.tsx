@@ -1,7 +1,4 @@
 import AnalysisCard from "@/components/analysis-card";
-import supabase from "@/lib/supabaseClient";
-import { auth, currentUser } from "@clerk/nextjs";
-import { Database } from "../../database.types";
 
 export default async function Home() {
   // const { userId } = auth();

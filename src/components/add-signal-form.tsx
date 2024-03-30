@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
-import supabase from "@/lib/supabaseClient"
 
 const formSchema = z.object({
     imageurl: z.string().min(6, {
@@ -46,13 +45,6 @@ export function AddSignalForm() {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values)
-        const { data } = await supabase.from("analysis").insert({
-            imageUrl: values.imageurl,
-            description: values.description,
-            pair: values.pair
-        })
-
-        console.log(data)
     }
 
     return (
