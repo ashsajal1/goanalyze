@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export default function AnalysisCard({ img }: { img: string }) {
   return (
-    <Card className='md:w-[330px]'>
+    <Card className='md:w-[320px]'>
       <CardHeader>
         <CardTitle>Analysis of XECUSDT</CardTitle>
         <CardDescription>This is the description of this analysis!</CardDescription>
