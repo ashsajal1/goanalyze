@@ -4,7 +4,7 @@ import { ModeToggle } from './mode-toggle'
 import { Button } from './ui/button'
 import { EnterIcon, RocketIcon } from '@radix-ui/react-icons'
 import { Badge } from './ui/badge'
-import { auth, currentUser } from "@clerk/nextjs";
+import { auth, currentUser, UserButton } from "@clerk/nextjs";
 import Image from 'next/image'
 
 export default async function Navbar() {
@@ -24,7 +24,7 @@ export default async function Navbar() {
         </Link>
         <ModeToggle />
 
-        {(user && user.hasImage) ? <Button className='relative'><Image alt='Profile image' src={user.imageUrl} layout="fill" /></Button> : <Link href='/sign-in'><Button variant="outline" size="icon"><EnterIcon /></Button></Link>}
+        {user ? <UserButton /> : <Link href='/sign-in'><Button variant="outline" size="icon"><EnterIcon /></Button></Link>}
 
       </div>
     </nav>
