@@ -3,6 +3,7 @@ import React from 'react'
 import { ModeToggle } from './mode-toggle'
 import { Button } from './ui/button'
 import { RocketIcon } from '@radix-ui/react-icons'
+import { Badge } from './ui/badge'
 
 export default function Navbar() {
   return (
@@ -13,6 +14,7 @@ export default function Navbar() {
           <Button variant={'secondary'}>
             <RocketIcon className="mr-2 h-4 w-4" />
             Signals
+            <Badge className='ml-2 rounded-full' variant="destructive">4</Badge>
           </Button>
         </Link>
         <ModeToggle />
