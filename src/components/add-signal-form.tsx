@@ -19,7 +19,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import prisma from "../../prisma/client"
 
 const formSchema = z.object({
-    imageurl: z.string().min(6, {
+    imageUrl: z.string().min(6, {
         message: "Image url must be at least 6 characters.",
     }),
     pair: z.string().min(5, {
@@ -35,7 +35,7 @@ export function AddSignalForm() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            imageurl: "",
+            imageUrl: "",
             pair: "",
             description: "",
         },
@@ -94,7 +94,7 @@ export function AddSignalForm() {
                         />
                         <FormField
                             control={form.control}
-                            name="imageurl"
+                            name="imageUrl"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Analysis</FormLabel>
