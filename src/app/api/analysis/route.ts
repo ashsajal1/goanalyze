@@ -1,19 +1,7 @@
 import { ZodError, z } from "zod";
 import { type NextRequest } from "next/server";
 import prisma from "../../../../prisma/client";
-
-// Define Zod schema for validation
-const analysisSchema = z.object({
-  imageUrl: z.string().url().startsWith("https://www.tradingview.com", {
-    message: "Must provide secure and tradingivew URL",
-  }), // Ensure a valid URL
-  description: z
-    .string()
-    .min(10, { message: "Must be 10 or fewer characters long" }), // Require a non-empty description
-  pair: z.string().min(5, {
-    message: "Can't be less than 5 characters!",
-  }), // Add any specific validation for the 'pair' field if needed
-});
+import { analysisSchema } from "@/validationSchema/analysisSchema";
 
 export async function POST(request: NextRequest) {
   try {

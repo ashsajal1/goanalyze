@@ -16,24 +16,13 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
-import prisma from "../../prisma/client"
+import { analysisSchema } from "@/validationSchema/analysisSchema"
 
-const formSchema = z.object({
-    imageUrl: z.string().min(6, {
-        message: "Image url must be at least 6 characters.",
-    }),
-    pair: z.string().min(5, {
-        message: "Pair must be at least 5 characters.",
-    }),
-    description: z.string().min(20, {
-        message: "Description must be at least 20 characters.",
-    }),
-})
 
 export function AddSignalForm() {
     // 1. Define your form.
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof analysisSchema>>({
+        resolver: zodResolver(analysisSchema),
         defaultValues: {
             imageUrl: "",
             pair: "",
@@ -41,29 +30,16 @@ export function AddSignalForm() {
         },
     })
 
-    // 2. Define a submit handler.
-    async function onSubmit(values: z.infer<typeof formSchema>) {
-        // try {
-        //     // Create the analysis using the form values
-        //     const createdAnalysis = await prisma.analysis.create({
-        //         data: {
-        //             imageUrl: values.imageurl,
-        //             description: values.description,
-        //             pair: values.pair,
-        //         }
-        //     });
-        //     console.log('Analysis created:', createdAnalysis);
-        // } catch (error) {
-        //     console.error('Error creating analysis:', error);
-        // }
+    async function onSubmit(values: z.infer<typeof analysisSchema>) {
+
         const response = await fetch('/api/analysis', {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify(values)
           });
-        //   return await response.json(); 
+
         const data = await response.json();
         console.log(data);
     }
