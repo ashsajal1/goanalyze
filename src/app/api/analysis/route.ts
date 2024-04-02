@@ -5,7 +5,12 @@ import { analysisSchema } from "@/validationSchema/analysisSchema";
 
 export async function GET(request: NextRequest) {
   try {
-    const analysis = await prisma.analysis.findMany({});
+    const analysis = await prisma.analysis.findMany({
+      take: 2,
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
     return Response.json({ res: analysis }, { status: 200 });
   } catch (error: any) {
     return Response.json({ error: error.message }, { status: 500 });
