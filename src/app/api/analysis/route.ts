@@ -3,6 +3,15 @@ import { type NextRequest } from "next/server";
 import prisma from "../../../../prisma/client";
 import { analysisSchema } from "@/validationSchema/analysisSchema";
 
+export async function GET(request: NextRequest) {
+  try {
+    const analysis = await prisma.analysis.findMany({});
+    return Response.json({ res: analysis }, { status: 200 });
+  } catch (error: any) {
+    return Response.json({ error: error.message }, { status: 500 });
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     // Validate the request data
