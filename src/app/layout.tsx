@@ -4,6 +4,12 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import Navbar from "@/components/navbar";
 import { ClerkProvider } from '@clerk/nextjs'
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,19 +25,21 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={inter.className}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navbar />
-            {children}
-          </ThemeProvider>
-        </body>
-      </html>
+      <QueryClientProvider client={queryClient}>
+        <html lang="en">
+          <body className={inter.className}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <Navbar />
+              {children}
+            </ThemeProvider>
+          </body>
+        </html>
+      </QueryClientProvider>
     </ClerkProvider>
   );
 }
