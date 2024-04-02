@@ -1,39 +1,28 @@
 "use client"
-import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import AnalysisCard from "@/components/analysis-card";
+import { Key } from 'react';
+
 
 export default function Home() {
-  const [analysisData, setAnalysisData] = useState([]);
+  const { isPending, error, data } = useQuery({
+    queryKey: ['analysisData'],
+    queryFn: () =>
+      fetch('/api/analysis').then((res) => res.json()),
+  })
 
-  useEffect(() => {
-    async function fetchAnalysisData() {
-      try {
-        const response = await fetch('/api/analysis');
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const data = await response.json();
-        setAnalysisData(data.res);
-      } catch (error) {
-        console.error(error);
-      }
-    }
+  // console.log(data)
+  if (isPending) return 'Loading...'
 
-    fetchAnalysisData();
-  }, []);
+  if (error) return 'An error has occurred: ' + error.message
 
   return (
     <main>
-      {analysisData.length > 0 ? (
-        <div className="flex items-center justify-between flex-wrap gap-2 p-2 md:p-4">
-          {analysisData.map((item, index) => (
-            <AnalysisCard key={index} img={item.imageUrl} />
-          ))}
-        </div>
-      ) : (
-        <p>Loading analysis data...</p>
-      )}
+      <div className="flex items-center justify-between flex-wrap gap-2 p-2 md:p-4">
+        {data.res.map((item: { imageUrl: string; }, index: Key | null | undefined) => (
+          <AnalysisCard key={index} img={item.imageUrl} />
+        ))}
+      </div>
     </main>
   );
-  
 }
