@@ -14,7 +14,7 @@ export default function Home() {
   // console.log(data)
   if (isPending) return 'Loading...'
 
-  if (error) return 'An error has occurred: ' + error.message
+  if (error) throw new Error('An error has occurred: ' + error.message)
 
   return (
     <main className="flex items-center justify-between flex-wrap gap-2 p-2 md:p-4">
