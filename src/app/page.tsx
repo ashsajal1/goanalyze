@@ -17,12 +17,10 @@ export default function Home() {
   if (error) return 'An error has occurred: ' + error.message
 
   return (
-    <main>
-      <div className="flex items-center justify-between flex-wrap gap-2 p-2 md:p-4">
-        {data.res.map((item: { imageUrl: string; }, index: Key | null | undefined) => (
-          <AnalysisCard key={index} img={item.imageUrl} />
-        ))}
-      </div>
+    <main className="flex items-center justify-between flex-wrap gap-2 p-2 md:p-4">
+      {data.res.map((item: { imageUrl: string; }, index: Key | null | undefined) => (
+        <AnalysisCard key={index} img={item.imageUrl} />
+      ))}
     </main>
   );
 }
